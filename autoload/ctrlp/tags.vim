@@ -78,7 +78,7 @@ function! ctrlp#tags#init(bufnr)
 	call g:VimDebug('enter ctrlp#tags#init')
 
 	let s:bufnr = a:bufnr
-    let s:filetype = getbufvar(a:bufnr, '&l:filetype')
+	let s:filetype = getbufvar(a:bufnr, '&l:filetype')
 	call g:VimDebug('filetype is ' .s:filetype)
 
 	return s:getTags()
@@ -120,22 +120,22 @@ function! s:getTags()
 	let ctagsOutput = system(ctagsCmd)
 	call g:VimDebug(ctagsOutput)
 
-    if ctagsOutput == -1
+	if ctagsOutput == -1
 		call g:VimDebug('ctagsoutput is -1')
-        return s:tags
-    elseif ctagsOutput == ''
+		return s:tags
+	elseif ctagsOutput == ''
 		call g:VimDebug('ctagsoutput is null')
-        return tags
-    endif
+		return tags
+	endif
 
-    let tag_list = split(ctagsOutput, '\n\+')
+	let tag_list = split(ctagsOutput, '\n\+')
 	for line in tag_list
-        " skip comments
-        if line =~# '^!_TAG_'
-            continue
-        endif
+		" skip comments
+		if line =~# '^!_TAG_'
+			continue
+		endif
 
-        let parts = split(line, '/^')
+		let parts = split(line, '/^')
 		let parts1 = get(parts, 0)
 		let parts2 = get(parts, 1)
 		let list1 = split(parts1, "\t")
@@ -149,10 +149,10 @@ function! s:getTags()
 		let type   = g:StringTrim(get(list2, 1))
 		let line     = name ."\t" .define ."\t" .type
 		call add(s:tags, line)
-    endfor
+	endfor
 	return s:tags
 endfunction
 
 function! s:after_jump()
-  silent! execute 'normal! zxzz'
+	silent! execute 'normal! zxzz'
 endfunction
