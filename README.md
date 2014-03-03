@@ -19,8 +19,8 @@ you can add a line into your .vimrc:
 	Bundle 'konkashaoqiu/ctrlp-tags.git'
 	Bundle 'konkashaoqiu/vim-tools.git'
 
-the vim-tools include some function,
-ctrlp-tags depend on them,so your need to install it
+the vim-tools include some functions,
+ctrlp-tags depend on them,so you need to install it.
 
 useage
 ==========
@@ -33,7 +33,7 @@ now you can use a command to start ctrlp-ctags:
 
 	:CtrlPTags or :CtrlPTags keyword
 
-I think it's better to add to keymap into your .vimrc:
+I think it's better to add two keymaps into your .vimrc:
 
 	nnoremap <Leader>ff :CtrlPTags<cr>
 	nnoremap <Leader>fd :execute 'CtrlPTags ' . expand('<cword>')<cr>
