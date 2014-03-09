@@ -116,7 +116,9 @@ endfunction
 
 function! s:getTags()
 	let s:tags = []
-	let ctagsCmd = 'ctags -f - ' .s:filepath
+	let ctagsBin = s:getCtagsBin()
+	let ctagsCmd = ctagsBin .' -f - ' .s:filepath
+	call g:VimDebug('ctags cmd = ' .ctagsCmd)
 	let ctagsOutput = system(ctagsCmd)
 	call g:VimDebug(ctagsOutput)
 
@@ -151,6 +153,14 @@ function! s:getTags()
 		call add(s:tags, line)
 	endfor
 	return s:tags
+endfunction
+
+function! s:getCtagsBin()
+	if has('win32') || has('win64') || has('win32unix')
+		return 'ctags.exe'
+	else 
+		return 'ctags'
+	endif
 endfunction
 
 function! s:after_jump()
