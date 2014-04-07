@@ -102,6 +102,9 @@ function! ctrlp#tags#accept(mode, str)
 	let lnum = search(pattern)
 	call g:VimDebug("search line number = " .lnum)
 
+    " Mark current position so it can be jumped back to
+    mark '
+
 	call setpos('.', [s:bufnr, lnum, 1, 0])
 	call s:after_jump()
 endfunction
